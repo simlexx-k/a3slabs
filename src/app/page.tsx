@@ -11,12 +11,24 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      <Hero />
-      <Services />
-      <Technologies />
-      <Projects />
-      <Team />
-      <Contact />
+      <div className="abstract-bg-primary">
+        <Hero />
+      </div>
+      <div className="geometric-bg-purple">
+        <Services />
+      </div>
+      <div className="floating-elements-bg">
+        <Technologies />
+      </div>
+      <div className="mesh-gradient-bg">
+        <Projects />
+      </div>
+      <div className="abstract-bg-emerald">
+        <Team />
+      </div>
+      <div className="animated-grid-bg">
+        <Contact />
+      </div>
       <Footer />
     </main>
   )

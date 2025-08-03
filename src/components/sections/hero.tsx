@@ -60,7 +60,7 @@ export function Hero() {
   }, [currentCodeIndex])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-dark">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div

@@ -60,7 +60,7 @@ const techCategories = [
 
 export function Technologies() {
   return (
-    <section className="py-20 bg-gradient-dark">
+    <section className="py-20">
       <Container>
         {/* Section Header */}
         <motion.div

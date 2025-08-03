@@ -21,7 +21,7 @@ const serviceVariants = [
 
 export function Services() {
   return (
-    <section id="services" className="py-20 bg-background">
+    <section id="services" className="py-20">
       <Container>
         {/* Section Header */}
         <motion.div

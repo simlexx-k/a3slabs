@@ -10,7 +10,7 @@ import { team } from "@/lib/constants"
 
 export function Team() {
   return (
-    <section id="team" className="py-20 bg-gradient-dark">
+    <section id="team" className="py-20">
       <Container>
         {/* Section Header */}
         <motion.div

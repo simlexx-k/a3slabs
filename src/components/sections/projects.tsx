@@ -19,7 +19,7 @@ export function Projects() {
     : projects.filter(project => project.category === selectedCategory)
 
   return (
-    <section id="projects" className="py-20 bg-background">
+    <section id="projects" className="py-20">
       <Container>
         {/* Section Header */}
         <motion.div
