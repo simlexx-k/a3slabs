@@ -61,7 +61,7 @@ export function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-dark">
-      {/* Animated Background Elements */}
+      {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-20 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
@@ -87,6 +87,30 @@ export function Hero() {
             ease: "linear",
           }}
         />
+        <motion.div
+          className="absolute top-1/2 left-1/2 w-64 h-64 bg-purple/10 rounded-full blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, -50, 0],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div
+          className="absolute top-1/4 right-1/4 w-48 h-48 bg-emerald/10 rounded-full blur-3xl"
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 35,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
       </div>
 
       <Container className="relative z-10">
@@ -103,7 +127,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
-                className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
+                className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 pulse-glow"
               >
                 <Zap className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium text-primary">
@@ -139,17 +163,17 @@ export function Hero() {
               transition={{ delay: 0.8, duration: 0.6 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Button size="lg" variant="gradient" className="group">
+              <Button size="lg" variant="accent" className="group">
                 Start Your Project
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="lg" variant="outline" className="group">
+              <Button size="lg" variant="accentPurple" className="group">
                 <Play className="mr-2 h-4 w-4" />
                 Watch Demo
               </Button>
             </motion.div>
 
-            {/* Stats */}
+            {/* Enhanced Stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -157,28 +181,28 @@ export function Hero() {
               className="grid grid-cols-3 gap-8 pt-8 border-t border-border"
             >
               <div className="text-center">
-                <div className="text-2xl font-bold gradient-text">100+</div>
+                <div className="text-2xl font-bold gradient-text-purple">100+</div>
                 <div className="text-sm text-muted-foreground">Projects Delivered</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold gradient-text">50+</div>
+                <div className="text-2xl font-bold gradient-text-emerald">50+</div>
                 <div className="text-sm text-muted-foreground">Happy Clients</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold gradient-text">24/7</div>
+                <div className="text-2xl font-bold gradient-text-orange">24/7</div>
                 <div className="text-sm text-muted-foreground">Support</div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Code Animation */}
+          {/* Right Content - Enhanced Code Animation */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative bg-card border border-border rounded-xl p-6 shadow-2xl">
+            <div className="relative bg-card border border-border rounded-xl p-6 shadow-2xl rainbow-border">
               {/* Code Header */}
               <div className="flex items-center space-x-2 mb-4">
                 <div className="flex space-x-2">
@@ -209,9 +233,9 @@ export function Hero() {
                 </pre>
               </div>
 
-              {/* Floating Elements */}
+              {/* Enhanced Floating Elements */}
               <motion.div
-                className="absolute -top-4 -right-4 w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center"
+                className="absolute -top-4 -right-4 w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center neon-glow"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
@@ -219,11 +243,27 @@ export function Hero() {
               </motion.div>
 
               <motion.div
-                className="absolute -bottom-4 -left-4 w-8 h-8 bg-secondary/20 rounded-full flex items-center justify-center"
+                className="absolute -bottom-4 -left-4 w-8 h-8 bg-secondary/20 rounded-full flex items-center justify-center neon-glow-emerald"
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, delay: 1 }}
               >
                 <TrendingUp className="h-4 w-4 text-secondary" />
+              </motion.div>
+
+              <motion.div
+                className="absolute top-1/2 -right-6 w-6 h-6 bg-purple/20 rounded-full flex items-center justify-center neon-glow-purple"
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <div className="w-2 h-2 bg-purple rounded-full" />
+              </motion.div>
+
+              <motion.div
+                className="absolute bottom-1/2 -left-6 w-6 h-6 bg-emerald/20 rounded-full flex items-center justify-center neon-glow-emerald"
+                animate={{ x: [0, -5, 0] }}
+                transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
+              >
+                <div className="w-2 h-2 bg-emerald rounded-full" />
               </motion.div>
             </div>
           </motion.div>

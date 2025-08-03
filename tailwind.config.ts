@@ -43,6 +43,28 @@ const config: Config = {
         border: "hsl(var(--color-border))",
         input: "hsl(var(--color-input))",
         ring: "hsl(var(--color-ring))",
+        success: "hsl(var(--color-success))",
+        warning: "hsl(var(--color-warning))",
+        info: "hsl(var(--color-info))",
+        purple: "hsl(var(--color-purple))",
+        pink: "hsl(var(--color-pink))",
+        orange: "hsl(var(--color-orange))",
+        teal: "hsl(var(--color-teal))",
+        indigo: "hsl(var(--color-indigo))",
+        emerald: "hsl(var(--color-emerald))",
+        rose: "hsl(var(--color-rose))",
+        amber: "hsl(var(--color-amber))",
+        lime: "hsl(var(--color-lime))",
+        cyan: "hsl(var(--color-cyan))",
+        slate: "hsl(var(--color-slate))",
+        gray: "hsl(var(--color-gray))",
+        zinc: "hsl(var(--color-zinc))",
+        neutral: "hsl(var(--color-neutral))",
+        stone: "hsl(var(--color-stone))",
+        red: "hsl(var(--color-red))",
+        green: "hsl(var(--color-green))",
+        blue: "hsl(var(--color-blue))",
+        yellow: "hsl(var(--color-yellow))",
         chart: {
           "1": "hsl(var(--color-chart-1))",
           "2": "hsl(var(--color-chart-2))",
@@ -72,6 +94,12 @@ const config: Config = {
         "gradient-xy": "gradient-xy 3s ease infinite",
         "float": "float 6s ease-in-out infinite",
         "glow": "glow 2s ease-in-out infinite alternate",
+        "glow-purple": "glow-purple 2s ease-in-out infinite alternate",
+        "glow-emerald": "glow-emerald 2s ease-in-out infinite alternate",
+        "glow-orange": "glow-orange 2s ease-in-out infinite alternate",
+        "rainbow": "rainbow 3s ease infinite",
+        "color-shift": "color-shift 4s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
       },
       keyframes: {
         "fade-in": {
@@ -136,6 +164,38 @@ const config: Config = {
           "0%": { boxShadow: "0 0 20px rgba(37, 99, 235, 0.3)" },
           "100%": { boxShadow: "0 0 30px rgba(37, 99, 235, 0.6)" },
         },
+        "glow-purple": {
+          "0%": { boxShadow: "0 0 20px rgba(147, 51, 234, 0.3)" },
+          "100%": { boxShadow: "0 0 30px rgba(147, 51, 234, 0.6)" },
+        },
+        "glow-emerald": {
+          "0%": { boxShadow: "0 0 20px rgba(16, 185, 129, 0.3)" },
+          "100%": { boxShadow: "0 0 30px rgba(16, 185, 129, 0.6)" },
+        },
+        "glow-orange": {
+          "0%": { boxShadow: "0 0 20px rgba(249, 115, 22, 0.3)" },
+          "100%": { boxShadow: "0 0 30px rgba(249, 115, 22, 0.6)" },
+        },
+        rainbow: {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "color-shift": {
+          "0%, 100%": { filter: "hue-rotate(0deg)" },
+          "25%": { filter: "hue-rotate(90deg)" },
+          "50%": { filter: "hue-rotate(180deg)" },
+          "75%": { filter: "hue-rotate(270deg)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { 
+            boxShadow: "0 0 20px rgba(37, 99, 235, 0.3)",
+            transform: "scale(1)"
+          },
+          "50%": { 
+            boxShadow: "0 0 40px rgba(37, 99, 235, 0.6)",
+            transform: "scale(1.05)"
+          },
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -143,6 +203,11 @@ const config: Config = {
         "gradient-primary": "linear-gradient(135deg, #2563eb, #8b5cf6)",
         "gradient-secondary": "linear-gradient(135deg, #0ea5e9, #06b6d4)",
         "gradient-dark": "linear-gradient(135deg, #0f172a, #1e293b)",
+        "gradient-purple": "linear-gradient(135deg, #8b5cf6, #ec4899)",
+        "gradient-emerald": "linear-gradient(135deg, #10b981, #14b8a6)",
+        "gradient-orange": "linear-gradient(135deg, #f97316, #f59e0b)",
+        "gradient-cyan": "linear-gradient(135deg, #0891b2, #2563eb)",
+        "gradient-rainbow": "linear-gradient(45deg, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #8b5cf6, #ec4899)",
       },
     },
   },

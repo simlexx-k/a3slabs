@@ -1,106 +1,117 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
-import { Menu, X, Code } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Container } from "@/components/ui/container"
-import { navigation, siteConfig } from "@/lib/constants"
-import { cn } from "@/lib/utils"
+import { Menu, X, Zap } from "lucide-react"
+import { navigation } from "@/lib/constants"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 glass backdrop-blur-md border-b border-white/10"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 header-accent-primary">
       <Container>
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <motion.div 
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
             className="flex items-center space-x-2"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <div className="flex items-center space-x-2">
-              <Code className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold gradient-text">
-                {siteConfig.name}
-              </span>
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center neon-glow">
+              <Zap className="h-5 w-5 text-white" />
             </div>
+            <span className="text-xl font-bold logo-accent-primary">A3S Labs</span>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <motion.nav
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="hidden md:flex items-center space-x-8"
+          >
             {navigation.map((item) => (
               <motion.a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors relative group"
                 whileHover={{ y: -2 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 {item.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </motion.a>
             ))}
-          </nav>
+          </motion.nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="sm">
-              Contact
+          {/* Desktop CTA */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="hidden md:flex items-center space-x-4"
+          >
+            <Button variant="ghost" size="sm" className="text-white hover:text-primary hover:bg-white/10">
+              Sign In
             </Button>
-            <Button variant="gradient" size="sm">
-              Start Project
+            <Button size="sm" className="btn-accent-primary">
+              Get Started
             </Button>
-          </div>
+          </motion.div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-muted-foreground hover:text-primary"
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-accent transition-colors text-foreground"
+          >
+            {isMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </motion.button>
         </div>
 
-        {/* Mobile Menu */}
-        <motion.div
-          className={cn(
-            "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
-            isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden border-t border-border"
+            >
+              <div className="py-4 space-y-4">
+                {navigation.map((item) => (
+                  <motion.a
+                    key={item.name}
+                    href={item.href}
+                    className="block text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    whileHover={{ x: 10 }}
+                  >
+                    {item.name}
+                  </motion.a>
+                ))}
+                <div className="pt-4 space-y-2">
+                  <Button variant="ghost" size="sm" className="w-full justify-start text-white hover:text-primary hover:bg-white/10">
+                    Sign In
+                  </Button>
+                  <Button size="sm" className="w-full justify-start btn-accent-primary">
+                    Get Started
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
           )}
-        >
-          <div className="py-4 space-y-4 border-t border-white/10">
-            {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="block text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
-            <div className="pt-4 space-y-2">
-              <Button variant="ghost" size="sm" className="w-full justify-start">
-                Contact
-              </Button>
-              <Button variant="gradient" size="sm" className="w-full">
-                Start Project
-              </Button>
-            </div>
-          </div>
-        </motion.div>
+        </AnimatePresence>
       </Container>
-    </motion.header>
+    </header>
   )
 } 

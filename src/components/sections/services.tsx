@@ -13,6 +13,12 @@ const iconMap = {
   Lightbulb: Lightbulb,
 }
 
+const serviceVariants = [
+  { gradientClass: "gradient-text", glowClass: "glow-effect", borderClass: "gradient-border" },
+  { gradientClass: "gradient-text-purple", glowClass: "glow-effect-purple", borderClass: "gradient-border-purple" },
+  { gradientClass: "gradient-text-emerald", glowClass: "glow-effect-emerald", borderClass: "gradient-border-emerald" },
+]
+
 export function Services() {
   return (
     <section id="services" className="py-20 bg-background">
@@ -30,7 +36,7 @@ export function Services() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
+            className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 pulse-glow"
           >
             <Code className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-primary">Our Services</span>
@@ -62,6 +68,7 @@ export function Services() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const IconComponent = iconMap[service.icon as keyof typeof iconMap]
+            const variant = serviceVariants[index % serviceVariants.length]
             
             return (
               <motion.div
@@ -73,16 +80,16 @@ export function Services() {
                 whileHover={{ y: -10 }}
                 className="group"
               >
-                <Card variant="service" className="h-full">
+                <Card variant="service" className={`h-full ${variant.borderClass} ${variant.glowClass}`}>
                   <CardHeader className="pb-4">
                     <motion.div
-                      className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                      className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg"
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
                     >
                       <IconComponent className="h-6 w-6 text-primary" />
                     </motion.div>
-                    <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
+                    <CardTitle className={`text-xl mb-2 ${variant.gradientClass}`}>{service.title}</CardTitle>
                     <CardDescription className="text-base">
                       {service.description}
                     </CardDescription>
@@ -105,7 +112,7 @@ export function Services() {
                       ))}
                     </div>
                     
-                    <Button variant="ghost" className="w-full group-hover:bg-primary/10 transition-colors">
+                    <Button variant="ghost" className="w-full group-hover:bg-primary/10 transition-colors hover:neon-glow">
                       Learn More
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
@@ -116,7 +123,7 @@ export function Services() {
           })}
         </div>
 
-        {/* CTA Section */}
+        {/* Enhanced CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -124,21 +131,21 @@ export function Services() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <Card variant="glass" className="max-w-2xl mx-auto p-8">
-            <h3 className="text-2xl font-bold mb-4">
+          <Card variant="glass" className="max-w-2xl mx-auto p-8 rainbow-border">
+            <h3 className="text-2xl font-bold mb-4 gradient-text">
               Ready to Transform Your Business?
             </h3>
             <p className="text-muted-foreground mb-6">
               Let&apos;s discuss how our expertise can drive your digital transformation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="gradient" size="lg">
-                Start Your Project
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button variant="outline" size="lg">
-                Schedule Consultation
-              </Button>
+                          <Button variant="accent" size="lg">
+              Start Your Project
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <Button variant="accentEmerald" size="lg">
+              Schedule Consultation
+            </Button>
             </div>
           </Card>
         </motion.div>
