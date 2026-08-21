@@ -1,3 +1,8 @@
+export type ProductReadout = {
+  label: string;
+  value: string;
+};
+
 export type Product = {
   slug: string;
   name: string;
@@ -10,6 +15,10 @@ export type Product = {
   repoUrl?: string;
   capabilities: string[];
   stack: string[];
+  previewLabel: string;
+  runtime: string;
+  flow: string[];
+  readout: ProductReadout[];
 };
 
 export const products: Product[] = [
@@ -32,6 +41,15 @@ export const products: Product[] = [
       "VPS + PostgreSQL + FastAPI backend",
     ],
     stack: ["Next.js", "FastAPI", "PostgreSQL", "Gemini", "Docker", "Cloudflare"],
+    previewLabel: "Signal → listing pipeline",
+    runtime: "Vercel frontend · VPS backend",
+    flow: ["Public signals", "Enrichment", "Vehicle records", "Marketplace"],
+    readout: [
+      { label: "Source", value: "X API" },
+      { label: "Enrichment", value: "Multimodal" },
+      { label: "Persistence", value: "PostgreSQL" },
+      { label: "Delivery", value: "Web" },
+    ],
   },
   {
     slug: "istatus",
@@ -51,6 +69,15 @@ export const products: Product[] = [
       "Cloudflare Access authentication boundary",
     ],
     stack: ["Next.js", "Robyn", "Docker", "SQLite", "Cloudflare Access", "Vercel"],
+    previewLabel: "Operations control plane",
+    runtime: "Private infrastructure console",
+    flow: ["Host", "Telemetry", "Alerts + logs", "Operations"],
+    readout: [
+      { label: "Scope", value: "Host + Docker" },
+      { label: "History", value: "Persistent" },
+      { label: "Access", value: "Cloudflare" },
+      { label: "Control", value: "Role-gated" },
+    ],
   },
   {
     slug: "rotorfrontier",
@@ -61,6 +88,7 @@ export const products: Product[] = [
       "A real-time simulation experiment with custom helicopter dynamics, georeferenced terrain, autonomous threats, weapons, mission progression, controller support and two-player WebRTC co-op running directly in modern browsers.",
     status: "Production alpha",
     accent: "amber",
+    liveUrl: "https://rotorfrontier.kiptookosgeisimon.chatgpt.site",
     repoUrl: "https://github.com/simlexx-k/rotorfrontier",
     capabilities: [
       "60 Hz deterministic helicopter dynamics",
@@ -70,6 +98,15 @@ export const products: Product[] = [
       "WebRTC peer-to-peer co-op",
     ],
     stack: ["React", "TypeScript", "Babylon.js", "WebRTC", "Web Audio", "IndexedDB"],
+    previewLabel: "Real-time simulation loop",
+    runtime: "Modern desktop browser",
+    flow: ["Input", "Flight model", "World + AI", "Render + audio"],
+    readout: [
+      { label: "Simulation", value: "60 Hz" },
+      { label: "Terrain", value: "Georeferenced" },
+      { label: "Multiplayer", value: "WebRTC" },
+      { label: "Runtime", value: "Browser" },
+    ],
   },
   {
     slug: "shuleyangu",
@@ -89,6 +126,15 @@ export const products: Product[] = [
       "STEM and subject-specific applications",
     ],
     stack: ["FastAPI", "Android", "Vue", "TypeScript", "PostgreSQL", "Docker"],
+    previewLabel: "Education platform surfaces",
+    runtime: "Web + mobile applications",
+    flow: ["School data", "Operations", "Learning tools", "User surfaces"],
+    readout: [
+      { label: "Users", value: "School ecosystem" },
+      { label: "Surfaces", value: "Web + mobile" },
+      { label: "Structure", value: "Multi-app" },
+      { label: "Focus", value: "Education ops" },
+    ],
   },
   {
     slug: "beeunity",
@@ -108,6 +154,15 @@ export const products: Product[] = [
       "FastAPI inference surface",
     ],
     stack: ["Python", "TensorFlow", "PyTorch", "scikit-learn", "FastAPI", "Kaggle"],
+    previewLabel: "Multimodal research pipeline",
+    runtime: "Research workflow + FastAPI",
+    flow: ["Hive audio", "Climate + NDVI", "Models", "Health signal"],
+    readout: [
+      { label: "Primary signal", value: "Audio" },
+      { label: "Context", value: "Weather + NDVI" },
+      { label: "Models", value: "CNN + boosted" },
+      { label: "Serving", value: "FastAPI" },
+    ],
   },
 ];
 
