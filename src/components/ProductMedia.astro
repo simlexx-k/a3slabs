@@ -1,0 +1,40 @@
+---
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+  title?: string;
+}
+
+const { product, title = "Repository media" } = Astro.props;
+const media = product.media ?? [];
+---
+
+{media.length > 0 && (
+  <section class="section-pad section-rule media-proof-section">
+    <div class="shell">
+      <header class="section-heading split-heading media-proof-heading">
+        <div>
+          <p class="section-kicker">{title}</p>
+          <h2>Visual evidence from the project itself.</h2>
+        </div>
+        <p>These are committed product marks, brand assets or research figures—not generated screenshots. Each item links back to its source repository.</p>
+      </header>
+
+      <div class:list={["media-proof-grid", media.length === 1 && "media-proof-grid-single"]}>
+        {media.map((item) => (
+          <figure class={`media-proof-card media-kind-${item.kind}`}>
+            <div class:list={["media-proof-frame", item.fit === "cover" ? "is-cover" : "is-contain"]}>
+              <img src={item.src} alt={item.alt} loading="lazy" decoding="async" referrerpolicy="no-referrer" />
+            </div>
+            <figcaption>
+              <span>{item.kind.replaceAll("-", " ")}</span>
+              <p>{item.caption}</p>
+              <a href={item.sourceUrl} target="_blank" rel="noreferrer">Source asset ↗</a>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
