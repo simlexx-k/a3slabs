@@ -1,0 +1,132 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { workEntries, workKinds } from "../data/work";
+
+const collectionJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "A3S Labs public work",
+  url: "https://a3slabs.co.ke/work",
+  description: "A curated index of public A3S Labs products, research systems, tools and experiments.",
+  hasPart: workEntries.map((item) => ({
+    "@type": "SoftwareSourceCode",
+    name: item.name,
+    codeRepository: item.url,
+    description: item.summary,
+    programmingLanguage: item.stack,
+  })),
+};
+---
+
+<BaseLayout
+  title="Public work — A3S Labs"
+  description="A curated index of public A3S Labs products, applied research, engineering tools and experiments with direct repository evidence."
+  canonicalPath="/work"
+  structuredData={collectionJsonLd}
+>
+  <section class="work-hero section-pad">
+    <div class="shell work-hero-grid">
+      <div>
+        <p class="eyebrow"><span>PUBLIC WORK</span><span>{String(workEntries.length).padStart(2, "0")} REPOSITORIES</span></p>
+        <h1>The wider lab, without the repository dump.</h1>
+        <p class="work-lede">Flagship products get dedicated briefs and case studies. This index exposes the broader public engineering trail: production systems, research pipelines, focused tools and experiments that are useful evidence of how the work evolved.</p>
+      </div>
+      <aside class="work-principle">
+        <span>CURATION RULE</span>
+        <p>Public does not automatically mean portfolio-worthy. The index favors repositories with a clear system, research question, operating constraint or reusable engineering idea.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-pad section-rule work-index-section">
+    <div class="shell">
+      <div class="work-controls" data-work-controls>
+        <label class="work-search">
+          <span>Search work</span>
+          <input type="search" placeholder="Search by system, area or technology" autocomplete="off" data-work-search />
+        </label>
+        <div class="work-filters" aria-label="Filter work by type">
+          {workKinds.map((kind) => (
+            <button type="button" data-work-filter={kind.value} aria-pressed={kind.value === "all" ? "true" : "false"}>{kind.label}</button>
+          ))}
+        </div>
+      </div>
+
+      <div class="work-status" aria-live="polite"><span data-work-count>{workEntries.length}</span> visible entries</div>
+
+      <div class="work-grid" data-work-grid>
+        {workEntries.map((item, index) => (
+          <article
+            class:list={["work-card", item.featured && "is-featured"]}
+            data-work-card
+            data-kind={item.kind}
+            data-search={`${item.name} ${item.repo} ${item.area} ${item.summary} ${item.stack.join(" ")}`.toLowerCase()}
+          >
+            <div class="work-card-head">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <small>{item.kind}</small>
+            </div>
+            <p class="work-area">{item.area}</p>
+            <h2>{item.name}</h2>
+            <p>{item.summary}</p>
+            <div class="work-stack" aria-label={`${item.name} technologies`}>
+              {item.stack.map((tech) => <span>{tech}</span>)}
+            </div>
+            <div class="work-card-foot">
+              <code>simlexx-k/{item.repo}</code>
+              <a href={item.url} target="_blank" rel="noreferrer">Repository ↗</a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="work-empty" hidden data-work-empty>
+        <strong>No matching work.</strong>
+        <p>Change the search term or category filter.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad work-context">
+    <div class="shell narrative-grid">
+      <div><p class="section-kicker">Context</p><h2>Experiments stay visible, but they do not pretend to be products.</h2></div>
+      <div class="narrative-copy">
+        <p>The repository history includes coursework, framework exploration, prototypes and production systems. This page preserves that range while making the maturity distinction explicit. For the systems currently defining A3S Labs, start with the product briefs and engineering case studies.</p>
+        <div class="hero-actions"><a class="button button-primary" href="/products">Flagship products <span>↗</span></a><a class="button button-quiet" href="/builds">Build log</a></div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (() => {
+      const search = document.querySelector('[data-work-search]');
+      const buttons = [...document.querySelectorAll('[data-work-filter]')];
+      const cards = [...document.querySelectorAll('[data-work-card]')];
+      const count = document.querySelector('[data-work-count]');
+      const empty = document.querySelector('[data-work-empty]');
+      if (!search || cards.length === 0) return;
+
+      let activeKind = 'all';
+      const update = () => {
+        const query = search.value.trim().toLowerCase();
+        let visible = 0;
+        cards.forEach((card) => {
+          const kindMatch = activeKind === 'all' || card.dataset.kind === activeKind;
+          const textMatch = !query || (card.dataset.search || '').includes(query);
+          const show = kindMatch && textMatch;
+          card.hidden = !show;
+          if (show) visible += 1;
+        });
+        if (count) count.textContent = String(visible);
+        if (empty) empty.hidden = visible !== 0;
+      };
+
+      search.addEventListener('input', update);
+      buttons.forEach((button) => button.addEventListener('click', () => {
+        activeKind = button.dataset.workFilter || 'all';
+        buttons.forEach((candidate) => candidate.setAttribute('aria-pressed', candidate === button ? 'true' : 'false'));
+        update();
+      }));
+    })();
+  </script>
+</BaseLayout>
