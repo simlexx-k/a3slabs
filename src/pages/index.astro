@@ -3,6 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductCard from "../components/ProductCard.astro";
 import { featuredProducts } from "../data/products";
 import { recentBuilds } from "../data/builds";
+import { workEntries } from "../data/work";
+
+const widerWork = workEntries.filter((item) => !item.featured).slice(0, 4);
 ---
 
 <BaseLayout>
@@ -14,6 +17,7 @@ import { recentBuilds } from "../data/builds";
         <p class="hero-lede">We build working products across applied AI, infrastructure, education, data systems and browser-native simulation. The work is the portfolio.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="/products">Explore products <span>↗</span></a>
+          <a class="button button-quiet" href="/work">Browse public work</a>
           <a class="button button-quiet" href="/builds">Read the build log</a>
         </div>
       </div>
@@ -40,6 +44,26 @@ import { recentBuilds } from "../data/builds";
       <div class="product-grid">
         {featuredProducts.map((product) => <ProductCard product={product} />)}
       </div>
+    </div>
+  </section>
+
+  <section class="section-pad home-work section-rule">
+    <div class="shell">
+      <header class="section-heading split-heading">
+        <div><p class="section-kicker">Wider public work</p><h2>The lab extends beyond the flagships.</h2></div>
+        <p>Selected research systems, engineering tools and experiments stay visible with their maturity made explicit. The complete index is searchable by system, area and technology.</p>
+      </header>
+      <div class="home-work-grid">
+        {widerWork.map((item, index) => (
+          <a class="home-work-card" href={item.url} target="_blank" rel="noreferrer">
+            <div><span>{String(index + 1).padStart(2, "0")}</span><small>{item.kind}</small></div>
+            <p>{item.area}</p>
+            <h3>{item.name}</h3>
+            <strong>Repository ↗</strong>
+          </a>
+        ))}
+      </div>
+      <div class="hero-actions"><a class="button button-quiet" href="/work">Open public work index</a></div>
     </div>
   </section>
 

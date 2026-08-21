@@ -12,9 +12,24 @@ export function getStaticPaths() {
 interface Props { product: Product; }
 const { product } = Astro.props;
 const caseStudy = caseStudyFor(product.slug);
+const productUrl = `https://a3slabs.co.ke/products/${product.slug}`;
+const productJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: product.name,
+  url: productUrl,
+  description: product.summary,
+  applicationCategory: product.eyebrow,
+  operatingSystem: product.runtime,
+  featureList: product.capabilities,
+  softwareRequirements: product.stack.join(", "),
+  codeRepository: product.repoUrl,
+  sameAs: [product.liveUrl, product.repoUrl].filter(Boolean),
+  author: { "@id": "https://a3slabs.co.ke/#organization" },
+};
 ---
 
-<BaseLayout title={`${product.name} — A3S Labs`} description={product.summary} canonicalPath={`/products/${product.slug}`}>
+<BaseLayout title={`${product.name} — A3S Labs`} description={product.summary} canonicalPath={`/products/${product.slug}`} structuredData={productJsonLd}>
   <section class={`product-hero section-pad accent-${product.accent}`}>
     <div class="shell product-hero-grid product-hero-grid-v2">
       <div class="product-hero-copy">
@@ -103,7 +118,7 @@ const caseStudy = caseStudyFor(product.slug);
   <section class="section-pad section-rule">
     <div class="shell next-system">
       <p>Continue through the lab.</p>
-      <div><a href="/builds">Build log <span>↗</span></a><a href="/products">All products <span>↗</span></a></div>
+      <div><a href="/work">Public work <span>↗</span></a><a href="/builds">Build log <span>↗</span></a><a href="/products">All products <span>↗</span></a></div>
     </div>
   </section>
 </BaseLayout>

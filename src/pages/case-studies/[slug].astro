@@ -11,9 +11,23 @@ export function getStaticPaths() {
 interface Props { study: CaseStudy; }
 const { study } = Astro.props;
 const product = products.find((item) => item.slug === study.productSlug);
+const caseUrl = `https://a3slabs.co.ke/case-studies/${study.slug}`;
+const caseJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: study.title,
+  url: caseUrl,
+  mainEntityOfPage: caseUrl,
+  description: study.problem,
+  articleSection: study.eyebrow,
+  about: product ? { "@type": "SoftwareApplication", name: product.name, url: `https://a3slabs.co.ke/products/${product.slug}` } : undefined,
+  author: { "@id": "https://a3slabs.co.ke/#organization" },
+  publisher: { "@id": "https://a3slabs.co.ke/#organization" },
+  sameAs: product?.repoUrl ? [product.repoUrl] : undefined,
+};
 ---
 
-<BaseLayout title={`${study.title} — A3S Labs`} description={study.problem} canonicalPath={`/case-studies/${study.slug}`}>
+<BaseLayout title={`${study.title} — A3S Labs`} description={study.problem} canonicalPath={`/case-studies/${study.slug}`} structuredData={caseJsonLd}>
   <section class:list={["case-hero", "section-pad", `accent-${study.accent}`]}>
     <div class="shell case-hero-grid">
       <div>

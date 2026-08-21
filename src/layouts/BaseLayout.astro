@@ -3,6 +3,7 @@ import "../styles/global.css";
 import "../styles/polish.css";
 import "../styles/editorial.css";
 import "../styles/media.css";
+import "../styles/work.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
@@ -10,28 +11,38 @@ interface Props {
   title?: string;
   description?: string;
   canonicalPath?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title = "A3S Labs — Software, intelligence and systems",
   description = "A3S Labs builds software products, applied intelligence systems, infrastructure tooling, education platforms and simulation experiments.",
   canonicalPath = Astro.url.pathname,
+  structuredData,
 } = Astro.props;
 
 const canonical = new URL(canonicalPath, "https://a3slabs.co.ke").toString();
 const socialImage = "https://a3slabs.co.ke/social-card.svg";
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "A3S Labs",
-  url: "https://a3slabs.co.ke",
-  description,
-  publisher: {
-    "@type": "Organization",
+const baseStructuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
     name: "A3S Labs",
     url: "https://a3slabs.co.ke",
+    description,
+    publisher: { "@id": "https://a3slabs.co.ke/#organization" },
   },
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://a3slabs.co.ke/#organization",
+    name: "A3S Labs",
+    url: "https://a3slabs.co.ke",
+    sameAs: ["https://github.com/simlexx-k", "https://x.com/simlexx0"],
+  },
+];
+const extraStructuredData = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
+const structuredGraph = [...baseStructuredData, ...extraStructuredData];
 ---
 
 <!doctype html>
@@ -41,6 +52,7 @@ const structuredData = {
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#0b0d0f" />
     <meta name="google-adsense-account" content="ca-pub-5456473575052681" />
@@ -58,9 +70,10 @@ const structuredData = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="A3S Labs build log" href="https://a3slabs.co.ke/builds.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredGraph)}></script>
     <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5456473575052681" crossorigin="anonymous"></script>
     <script is:inline>
       (() => {
