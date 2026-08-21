@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProductMedia from "../../components/ProductMedia.astro";
 import SystemPreview from "../../components/SystemPreview.astro";
 import { products, type Product } from "../../data/products";
 import { caseStudyFor } from "../../data/caseStudies";
@@ -45,6 +46,8 @@ const caseStudy = caseStudyFor(product.slug);
       </aside>
     </div>
   </section>
+
+  <ProductMedia product={product} />
 
   <section class="section-pad detail-band">
     <div class="shell detail-columns detail-columns-v2">
