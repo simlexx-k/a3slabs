@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SystemPreview from "../../components/SystemPreview.astro";
 import { products, type Product } from "../../data/products";
 
 export function getStaticPaths() {
@@ -12,41 +13,72 @@ const { product } = Astro.props;
 
 <BaseLayout title={`${product.name} — A3S Labs`} description={product.summary} canonicalPath={`/products/${product.slug}`}>
   <section class={`product-hero section-pad accent-${product.accent}`}>
-    <div class="shell product-hero-grid">
-      <div>
+    <div class="shell product-hero-grid product-hero-grid-v2">
+      <div class="product-hero-copy">
         <p class="eyebrow"><span>{product.eyebrow}</span><span>{product.status}</span></p>
         <h1>{product.name}</h1>
         <p class="product-lede">{product.summary}</p>
+        <div class="product-hero-actions">
+          {product.liveUrl && <a class="button button-primary" href={product.liveUrl} target="_blank" rel="noreferrer">Open live product <span>↗</span></a>}
+          {product.repoUrl && <a class="button button-quiet" href={product.repoUrl} target="_blank" rel="noreferrer">Inspect repository ↗</a>}
+        </div>
       </div>
-      <div class="product-orbit" aria-hidden="true"><span>{product.name.slice(0, 2).toUpperCase()}</span></div>
+      <SystemPreview product={product} />
     </div>
   </section>
 
   <section class="section-pad section-rule">
-    <div class="shell detail-grid">
+    <div class="shell detail-grid detail-grid-v2">
       <div class="detail-copy">
         <p class="section-kicker">System brief</p>
         <h2>{product.description}</h2>
       </div>
-      <div class="detail-actions">
-        {product.liveUrl && <a class="button button-primary" href={product.liveUrl} target="_blank" rel="noreferrer">Open live product <span>↗</span></a>}
-        {product.repoUrl && <a class="button button-quiet" href={product.repoUrl} target="_blank" rel="noreferrer">Inspect repository ↗</a>}
-      </div>
+      <aside class="runtime-card">
+        <p class="section-kicker">Runtime</p>
+        <strong>{product.runtime}</strong>
+        <div class="runtime-stack">
+          {product.stack.map((item) => <span>{item}</span>)}
+        </div>
+      </aside>
     </div>
   </section>
 
   <section class="section-pad detail-band">
-    <div class="shell detail-columns">
+    <div class="shell detail-columns detail-columns-v2">
       <div>
         <p class="section-kicker">Capabilities</p>
         <ol class="capability-numbered">
           {product.capabilities.map((item, index) => <li><span>0{index + 1}</span><b>{item}</b></li>)}
         </ol>
       </div>
-      <div>
-        <p class="section-kicker">Technology</p>
-        <div class="stack-large">{product.stack.map((item) => <span>{item}</span>)}</div>
+      <div class="architecture-panel">
+        <p class="section-kicker">System path</p>
+        <div class="architecture-flow">
+          {product.flow.map((step, index) => (
+            <div>
+              <span>0{index + 1}</span>
+              <strong>{step}</strong>
+            </div>
+          ))}
+        </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section-pad section-rule">
+    <div class="shell proof-readout-grid">
+      <div>
+        <p class="section-kicker">Operational readout</p>
+        <h2>Built around an actual signal path, not a capability checklist.</h2>
+      </div>
+      <dl class="product-readout-list">
+        {product.readout.map((item) => (
+          <div>
+            <dt>{item.label}</dt>
+            <dd>{item.value}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </section>
 
