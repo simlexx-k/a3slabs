@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# A3S Labs
 
-## Getting Started
+The public A3S Labs product and research site.
 
-First, run the development server:
+This repository is intentionally static-first. It uses Astro to present real products, engineering work and applied research without turning the corporate site into another application runtime.
+
+## Stack
+
+- Astro 7.2
+- TypeScript
+- Plain CSS design system
+- Static output for Vercel
+- Native light/dark theme toggle
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production build:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Content model
 
-## Learn More
+Product metadata lives in `src/data/products.ts`. Individual product pages are generated from that source through `src/pages/products/[slug].astro`.
 
-To learn more about Next.js, take a look at the following resources:
+The current public portfolio includes The Torque, iStatus, RotorFrontier, ShuleYangu and BeeUnity.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Ads.txt
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`public/ads.txt` must remain available at `https://a3slabs.co.ke/ads.txt` for the configured Google AdSense publisher.

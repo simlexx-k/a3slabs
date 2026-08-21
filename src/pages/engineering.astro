@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Engineering — A3S Labs" description="How A3S Labs approaches application platforms, data systems, infrastructure, deployment and real-time software.">
+  <section class="page-hero section-pad">
+    <div class="shell page-hero-grid">
+      <p class="eyebrow"><span>ENGINEERING</span><span>A3S / 03</span></p>
+      <div><h1>Build the whole path.</h1><p>Interface quality matters, but so do ingestion, data models, background work, access boundaries, failure recovery and deployment behavior.</p></div>
+    </div>
+  </section>
+
+  <section class="section-pad section-rule">
+    <div class="shell engineering-grid">
+      <article><span>01</span><h2>Application platforms</h2><p>React, Next.js, Vue and mobile surfaces backed by typed APIs and persistent data models.</p><div class="tag-row"><span>TypeScript</span><span>React</span><span>Next.js</span><span>Vue</span><span>Android</span></div></article>
+      <article><span>02</span><h2>Data & intelligence</h2><p>Collection pipelines, multimodal enrichment, classical ML, deep learning, structured outputs and decision-support interfaces.</p><div class="tag-row"><span>Python</span><span>FastAPI</span><span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span></div></article>
+      <article><span>03</span><h2>Infrastructure</h2><p>Containerized services, observability, secure service-to-service boundaries and practical VPS deployment.</p><div class="tag-row"><span>Docker</span><span>PostgreSQL</span><span>Cloudflare</span><span>Vercel</span><span>Linux</span></div></article>
+      <article><span>04</span><h2>Real-time systems</h2><p>Browser graphics, deterministic update loops, controllers, peer-to-peer networking, sensors and simulation UX.</p><div class="tag-row"><span>Babylon.js</span><span>WebRTC</span><span>Web Audio</span><span>IndexedDB</span></div></article>
+    </div>
+  </section>
+
+  <section class="section-pad detail-band">
+    <div class="shell principle-grid">
+      <div><p class="section-kicker">Engineering principles</p><h2>Small set. Strong defaults.</h2></div>
+      <div class="principles">
+        <p><b>01 / Evidence</b><span>Expose provenance and uncertainty when software is interpreting external data.</span></p>
+        <p><b>02 / Boundaries</b><span>Keep credentials server-side, narrow public routes and separate operator controls from public product surfaces.</span></p>
+        <p><b>03 / Recovery</b><span>Design ingestion, enrichment and deployment flows so transient failures can be retried without corrupting state.</span></p>
+        <p><b>04 / Product quality</b><span>Performance, typography, responsive behavior and accessibility are part of engineering—not polish added at the end.</span></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { products } from "../data/products";
+---
+
+<BaseLayout title="Products — A3S Labs" description="Products and systems built by A3S Labs across intelligence, infrastructure, education, simulation and applied machine learning.">
+  <section class="page-hero section-pad">
+    <div class="shell page-hero-grid">
+      <p class="eyebrow"><span>PRODUCTS</span><span>A3S / 01</span></p>
+      <div><h1>Software we can point to.</h1><p>Each system exists because a concrete problem demanded an implementation—not because a capability list needed another bullet.</p></div>
+    </div>
+  </section>
+  <section class="section-pad section-rule">
+    <div class="shell product-grid product-grid-page">
+      {products.map((product) => <ProductCard product={product} />)}
+    </div>
+  </section>
+</BaseLayout>

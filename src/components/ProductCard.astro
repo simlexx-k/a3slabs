@@ -1,0 +1,24 @@
+---
+import type { Product } from "../data/products";
+interface Props { product: Product; compact?: boolean; }
+const { product, compact = false } = Astro.props;
+---
+
+<article class:list={["product-card", `accent-${product.accent}`, compact && "is-compact"]}>
+  <div class="product-card-top">
+    <span class="product-index">{product.eyebrow}</span>
+    <span class="status-chip"><i></i>{product.status}</span>
+  </div>
+  <div class="product-card-body">
+    <h3>{product.name}</h3>
+    <p>{product.summary}</p>
+  </div>
+  {!compact && (
+    <div class="product-stack" aria-label={`${product.name} technology stack`}>
+      {product.stack.slice(0, 4).map((item) => <span>{item}</span>)}
+    </div>
+  )}
+  <a class="card-link" href={`/products/${product.slug}`} aria-label={`Explore ${product.name}`}>
+    <span>Explore system</span><span aria-hidden="true">↗</span>
+  </a>
+</article>

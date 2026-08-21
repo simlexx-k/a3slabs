@@ -1,0 +1,40 @@
+---
+const pathname = Astro.url.pathname;
+const links = [
+  ["Products", "/products"],
+  ["Research", "/research"],
+  ["Engineering", "/engineering"],
+  ["About", "/about"],
+];
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="/" aria-label="A3S Labs home">
+      <span class="brand-mark" aria-hidden="true">A3</span>
+      <span class="brand-copy">A3S <b>LABS</b></span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {links.map(([label, href]) => (
+        <a class:list={["nav-link", pathname.startsWith(href) && "is-active"]} href={href}>{label}</a>
+      ))}
+    </nav>
+
+    <div class="header-actions">
+      <a class="github-link" href="https://github.com/simlexx-k" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+        <span class="theme-icon theme-icon-sun" aria-hidden="true">☼</span>
+        <span class="theme-track" aria-hidden="true"><span class="theme-thumb"></span></span>
+        <span class="theme-icon theme-icon-moon" aria-hidden="true">◐</span>
+      </button>
+      <details class="mobile-menu">
+        <summary aria-label="Open navigation">Menu</summary>
+        <nav aria-label="Mobile navigation">
+          {links.map(([label, href]) => <a href={href}>{label}</a>)}
+          <a href="https://github.com/simlexx-k" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
