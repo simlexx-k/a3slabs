@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildEntries } from "../data/builds";
+---
+
+<BaseLayout title="Build Log — A3S Labs" description="A repository-grounded chronology of product and engineering milestones across A3S Labs systems." canonicalPath="/builds">
+  <section class="page-hero section-pad">
+    <div class="shell page-hero-grid">
+      <p class="eyebrow"><span>BUILD LOG</span><span>A3S / 04</span></p>
+      <div>
+        <h1>What changed, and why it mattered.</h1>
+        <p>This log is built from real repository milestones. It records the engineering moves behind the products instead of reducing progress to release slogans.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad section-rule">
+    <div class="shell build-log">
+      {buildEntries.map((entry, index) => (
+        <article class:list={["build-entry", `accent-${entry.accent}`]}>
+          <div class="build-date">
+            <span>{entry.date}</span>
+            <small>{String(index + 1).padStart(2, "0")}</small>
+          </div>
+          <div class="build-copy">
+            <p class="section-kicker">{entry.project}</p>
+            <h2>{entry.title}</h2>
+            <p>{entry.summary}</p>
+            <div class="tag-row">{entry.tags.map((tag) => <span>{tag}</span>)}</div>
+          </div>
+          <div class="build-actions">
+            <a href={entry.commitUrl} target="_blank" rel="noreferrer">Inspect commit ↗</a>
+            <a href={entry.repoUrl} target="_blank" rel="noreferrer">Repository ↗</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-pad detail-band">
+    <div class="shell build-note-grid">
+      <div><p class="section-kicker">Why publish the build log?</p><h2>Progress should be inspectable.</h2></div>
+      <div>
+        <p>A3S Labs products evolve through data-model changes, runtime constraints, security boundaries, UX corrections and deployment work. Publishing selected milestones makes that work visible and keeps the portfolio tied to evidence.</p>
+        <a class="button button-quiet" href="https://github.com/simlexx-k" target="_blank" rel="noreferrer">Browse all repositories ↗</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

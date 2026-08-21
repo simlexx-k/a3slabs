@@ -1,8 +1,8 @@
 # A3S Labs
 
-The public A3S Labs product and research site.
+The public A3S Labs product, research and engineering site.
 
-This repository is intentionally static-first. It uses Astro to present real products, engineering work and applied research without turning the corporate site into another application runtime.
+This repository is intentionally static-first. Astro presents real products, engineering work, case studies and applied research without turning the corporate site into another application runtime.
 
 ## Stack
 
@@ -11,6 +11,7 @@ This repository is intentionally static-first. It uses Astro to present real pro
 - Plain CSS design system
 - Static output for Vercel
 - Native light/dark theme toggle
+- GitHub Actions build validation
 
 ## Local development
 
@@ -27,9 +28,19 @@ npm run build
 
 ## Content model
 
-Product metadata lives in `src/data/products.ts`. Individual product pages are generated from that source through `src/pages/products/[slug].astro`.
+- Product metadata: `src/data/products.ts`
+- Product pages: `src/pages/products/[slug].astro`
+- Case studies: `src/data/caseStudies.ts` + `src/pages/case-studies/[slug].astro`
+- Repository-grounded build log: `src/data/builds.ts` + `src/pages/builds.astro`
+- Research and engineering narratives: `src/pages/research.astro`, `src/pages/engineering.astro`
 
 The current public portfolio includes The Torque, iStatus, RotorFrontier, ShuleYangu and BeeUnity.
+
+## Deployment policy
+
+Vercel is reserved for **production builds from `master`**. Automatic Preview builds are intentionally disabled in the Vercel project settings to reduce resource consumption.
+
+Branches and pull requests are validated with GitHub Actions instead. See `docs/deployment.md`.
 
 ## Ads.txt
 

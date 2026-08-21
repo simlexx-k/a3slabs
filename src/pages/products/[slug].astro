@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SystemPreview from "../../components/SystemPreview.astro";
 import { products, type Product } from "../../data/products";
+import { caseStudyFor } from "../../data/caseStudies";
 
 export function getStaticPaths() {
   return products.map((product) => ({ params: { slug: product.slug }, props: { product } }));
@@ -9,6 +10,7 @@ export function getStaticPaths() {
 
 interface Props { product: Product; }
 const { product } = Astro.props;
+const caseStudy = caseStudyFor(product.slug);
 ---
 
 <BaseLayout title={`${product.name} — A3S Labs`} description={product.summary} canonicalPath={`/products/${product.slug}`}>
@@ -20,6 +22,7 @@ const { product } = Astro.props;
         <p class="product-lede">{product.summary}</p>
         <div class="product-hero-actions">
           {product.liveUrl && <a class="button button-primary" href={product.liveUrl} target="_blank" rel="noreferrer">Open live product <span>↗</span></a>}
+          {caseStudy && <a class="button button-quiet" href={`/case-studies/${caseStudy.slug}`}>Read case study ↗</a>}
           {product.repoUrl && <a class="button button-quiet" href={product.repoUrl} target="_blank" rel="noreferrer">Inspect repository ↗</a>}
         </div>
       </div>
@@ -82,10 +85,22 @@ const { product } = Astro.props;
     </div>
   </section>
 
+  {caseStudy && (
+    <section class="section-pad case-outcome">
+      <div class="shell narrative-grid">
+        <div><p class="section-kicker">Engineering case study</p><h2>See the constraints behind the product.</h2></div>
+        <div class="narrative-copy">
+          <p>{caseStudy.problem}</p>
+          <a class="button button-primary" href={`/case-studies/${caseStudy.slug}`}>Open case study <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+  )}
+
   <section class="section-pad section-rule">
     <div class="shell next-system">
       <p>Continue through the lab.</p>
-      <a href="/products">All products <span>↗</span></a>
+      <div><a href="/builds">Build log <span>↗</span></a><a href="/products">All products <span>↗</span></a></div>
     </div>
   </section>
 </BaseLayout>

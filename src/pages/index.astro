@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductCard from "../components/ProductCard.astro";
 import { featuredProducts } from "../data/products";
+import { recentBuilds } from "../data/builds";
 ---
 
 <BaseLayout>
@@ -13,7 +14,7 @@ import { featuredProducts } from "../data/products";
         <p class="hero-lede">We build working products across applied AI, infrastructure, education, data systems and browser-native simulation. The work is the portfolio.</p>
         <div class="hero-actions">
           <a class="button button-primary" href="/products">Explore products <span>↗</span></a>
-          <a class="button button-quiet" href="/engineering">How we build</a>
+          <a class="button button-quiet" href="/builds">Read the build log</a>
         </div>
       </div>
 
@@ -84,6 +85,26 @@ secure delivery · observable runtime</code></pre>
     </div>
   </section>
 
+  <section class="section-pad home-builds">
+    <div class="shell">
+      <header class="section-heading split-heading">
+        <div><p class="section-kicker">Recent build log</p><h2>Progress with repository evidence.</h2></div>
+        <p>Selected milestones are tied to real commits, so the portfolio shows how systems change—not only the state they ended up in.</p>
+      </header>
+      <div class="home-build-list">
+        {recentBuilds.map((entry) => (
+          <a class="home-build-row" href={entry.commitUrl} target="_blank" rel="noreferrer">
+            <time datetime={entry.date}>{entry.date}</time>
+            <small>{entry.project}</small>
+            <b>{entry.title}</b>
+            <span aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
+      <div class="hero-actions"><a class="button button-quiet" href="/builds">Open full build log</a></div>
+    </div>
+  </section>
+
   <section class="section-pad research-strip">
     <div class="shell research-grid">
       <div>
@@ -91,7 +112,7 @@ secure delivery · observable runtime</code></pre>
         <h2>Applied ML should meet a real signal.</h2>
       </div>
       <div class="research-copy">
-        <p>BeeUnity combines acoustic classification with weather, NDVI and hive context. Other work spans computer vision, structured data, forecasting and model evaluation.</p>
+        <p>BeeUnity combines acoustic classification with weather, NDVI and hive context. Other work spans topology-aware 3D segmentation, computer vision, forecasting and model evaluation.</p>
         <a class="button button-quiet" href="/research">Explore research</a>
       </div>
     </div>
