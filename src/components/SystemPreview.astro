@@ -1,0 +1,47 @@
+---
+import type { Product } from "../data/products";
+
+interface Props {
+  product: Product;
+  compact?: boolean;
+}
+
+const { product, compact = false } = Astro.props;
+---
+
+<div class:list={["system-preview", `accent-${product.accent}`, compact && "system-preview-compact"]} aria-label={`${product.name} system preview`}>
+  <div class="system-preview-head">
+    <span>{product.previewLabel}</span>
+    <span class="system-preview-state"><i></i>{product.status}</span>
+  </div>
+
+  <div class="system-preview-stage">
+    <div class="system-preview-flow" aria-hidden="true">
+      {product.flow.map((step, index) => (
+        <>
+          <div class="system-node">
+            <span>0{index + 1}</span>
+            <b>{step}</b>
+          </div>
+          {index < product.flow.length - 1 && <span class="system-connector">→</span>}
+        </>
+      ))}
+    </div>
+
+    {!compact && (
+      <div class="system-preview-readout">
+        {product.readout.map((item) => (
+          <div>
+            <span>{item.label}</span>
+            <b>{item.value}</b>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+
+  <div class="system-preview-foot">
+    <span>{product.runtime}</span>
+    <span>{product.stack.slice(0, 3).join(" · ")}</span>
+  </div>
+</div>
