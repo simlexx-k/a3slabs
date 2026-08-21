@@ -1,5 +1,6 @@
 ---
 import type { Product } from "../data/products";
+import SystemPreview from "./SystemPreview.astro";
 interface Props { product: Product; compact?: boolean; }
 const { product, compact = false } = Astro.props;
 ---
@@ -9,16 +10,28 @@ const { product, compact = false } = Astro.props;
     <span class="product-index">{product.eyebrow}</span>
     <span class="status-chip"><i></i>{product.status}</span>
   </div>
+
+  {!compact && <SystemPreview product={product} compact />}
+
   <div class="product-card-body">
     <h3>{product.name}</h3>
     <p>{product.summary}</p>
   </div>
+
   {!compact && (
     <div class="product-stack" aria-label={`${product.name} technology stack`}>
       {product.stack.slice(0, 4).map((item) => <span>{item}</span>)}
     </div>
   )}
-  <a class="card-link" href={`/products/${product.slug}`} aria-label={`Explore ${product.name}`}>
-    <span>Explore system</span><span aria-hidden="true">↗</span>
-  </a>
+
+  <div class="product-card-links">
+    <a class="card-link" href={`/products/${product.slug}`} aria-label={`Explore ${product.name}`}>
+      <span>Explore system</span><span aria-hidden="true">↗</span>
+    </a>
+    {product.liveUrl && (
+      <a class="card-link card-link-live" href={product.liveUrl} target="_blank" rel="noreferrer" aria-label={`Open ${product.name}`}>
+        <span>Open live</span><span aria-hidden="true">↗</span>
+      </a>
+    )}
+  </div>
 </article>
