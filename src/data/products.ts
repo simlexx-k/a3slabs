@@ -3,6 +3,15 @@ export type ProductReadout = {
   value: string;
 };
 
+export type ProductMedia = {
+  src: string;
+  alt: string;
+  caption: string;
+  sourceUrl: string;
+  kind: "product-mark" | "brand-artwork" | "research-figure";
+  fit?: "contain" | "cover";
+};
+
 export type Product = {
   slug: string;
   name: string;
@@ -19,6 +28,7 @@ export type Product = {
   runtime: string;
   flow: string[];
   readout: ProductReadout[];
+  media?: ProductMedia[];
 };
 
 export const products: Product[] = [
@@ -50,6 +60,16 @@ export const products: Product[] = [
       { label: "Persistence", value: "PostgreSQL" },
       { label: "Delivery", value: "Web" },
     ],
+    media: [
+      {
+        src: "https://raw.githubusercontent.com/simlexx-k/the-torque/main/frontend/public/icons/icon-192.jpg",
+        alt: "The Torque current product icon",
+        caption: "Current product mark committed with The Torque frontend.",
+        sourceUrl: "https://github.com/simlexx-k/the-torque/blob/main/frontend/public/icons/icon-192.jpg",
+        kind: "product-mark",
+        fit: "contain",
+      },
+    ],
   },
   {
     slug: "istatus",
@@ -77,6 +97,16 @@ export const products: Product[] = [
       { label: "History", value: "Persistent" },
       { label: "Access", value: "Cloudflare" },
       { label: "Control", value: "Role-gated" },
+    ],
+    media: [
+      {
+        src: "https://raw.githubusercontent.com/simlexx-k/a3s-labs-stat/main/web-app/public/brand/a3s-labs-platform-hero-banner.png",
+        alt: "A3S Labs infrastructure platform artwork used by iStatus",
+        caption: "Infrastructure platform artwork committed with the iStatus web application.",
+        sourceUrl: "https://github.com/simlexx-k/a3s-labs-stat/blob/main/web-app/public/brand/a3s-labs-platform-hero-banner.png",
+        kind: "brand-artwork",
+        fit: "cover",
+      },
     ],
   },
   {
@@ -162,6 +192,24 @@ export const products: Product[] = [
       { label: "Context", value: "Weather + NDVI" },
       { label: "Models", value: "CNN + boosted" },
       { label: "Serving", value: "FastAPI" },
+    ],
+    media: [
+      {
+        src: "https://raw.githubusercontent.com/simlexx-k/QueenBeeAcoustics/main/artifacts/figures/acoustic_confusion_matrix.png",
+        alt: "BeeUnity acoustic classifier confusion matrix",
+        caption: "Acoustic classifier confusion matrix committed as a research artifact.",
+        sourceUrl: "https://github.com/simlexx-k/QueenBeeAcoustics/blob/main/artifacts/figures/acoustic_confusion_matrix.png",
+        kind: "research-figure",
+        fit: "contain",
+      },
+      {
+        src: "https://raw.githubusercontent.com/simlexx-k/QueenBeeAcoustics/main/artifacts/figures/sequence_cnn_pr_roc.png",
+        alt: "BeeUnity sequence CNN precision-recall and ROC evaluation figure",
+        caption: "Sequence CNN precision-recall and ROC evaluation committed with the model artifacts.",
+        sourceUrl: "https://github.com/simlexx-k/QueenBeeAcoustics/blob/main/artifacts/figures/sequence_cnn_pr_roc.png",
+        kind: "research-figure",
+        fit: "contain",
+      },
     ],
   },
 ];
