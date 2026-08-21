@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProductMedia from "../../components/ProductMedia.astro";
 import { caseStudies, type CaseStudy } from "../../data/caseStudies";
 import { products } from "../../data/products";
 
@@ -21,6 +22,7 @@ const product = products.find((item) => item.slug === study.productSlug);
         <p class="case-hero-lede">{study.problem}</p>
         <div class="hero-actions">
           {product && <a class="button button-primary" href={`/products/${product.slug}`}>Product brief <span>↗</span></a>}
+          {product?.liveUrl && <a class="button button-quiet" href={product.liveUrl} target="_blank" rel="noreferrer">Open live product ↗</a>}
           {product?.repoUrl && <a class="button button-quiet" href={product.repoUrl} target="_blank" rel="noreferrer">Repository ↗</a>}
         </div>
       </div>
@@ -40,6 +42,8 @@ const product = products.find((item) => item.slug === study.productSlug);
       <div class="narrative-copy"><p>{study.approach}</p></div>
     </div>
   </section>
+
+  {product && <ProductMedia product={product} title="Project evidence" />}
 
   <section class="section-pad detail-band">
     <div class="shell">
