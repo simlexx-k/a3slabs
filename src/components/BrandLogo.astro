@@ -1,0 +1,20 @@
+---
+interface Props {
+  variant?: "horizontal" | "stacked" | "mark";
+  class?: string;
+  alt?: string;
+}
+
+const { variant = "horizontal", class: className = "", alt = "" } = Astro.props;
+const isMark = variant === "mark";
+const baseName = variant === "stacked" ? "a3s-labs-stacked" : "a3s-labs-primary-horizontal";
+---
+
+{isMark ? (
+  <img class:list={["brand-image", "brand-image-mark", className]} src="/brand/a3s-labs-mark.webp" alt={alt} loading="eager" decoding="async" />
+) : (
+  <span class:list={["brand-image-pair", `brand-image-${variant}`, className]} aria-hidden={alt ? undefined : "true"}>
+    <img class="brand-image brand-image-light" src={`/brand/${baseName}.webp`} alt={alt} loading="eager" decoding="async" />
+    <img class="brand-image brand-image-dark" src={`/brand/${baseName}-on-dark.webp`} alt={alt} loading="eager" decoding="async" />
+  </span>
+)}
