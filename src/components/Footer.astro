@@ -1,37 +1,16 @@
+---
+import BrandLogo from "./BrandLogo.astro";
+---
 <footer class="site-footer">
   <div class="shell footer-grid">
     <div>
-      <a class="brand footer-brand" href="/" aria-label="A3S Labs home">
-        <span class="brand-mark" aria-hidden="true">A3</span>
-        <span class="brand-copy">A3S <b>LABS</b></span>
-      </a>
+      <a class="brand footer-brand footer-brand-lockup" href="/" aria-label="A3S Labs home"><BrandLogo variant="stacked" /></a>
       <p class="footer-statement">Software products, applied intelligence and systems engineering from Kenya.</p>
     </div>
-
     <div class="footer-links">
-      <div>
-        <span>Explore</span>
-        <a href="/products">Products</a>
-        <a href="/work">Public work</a>
-        <a href="/research">Research</a>
-        <a href="/engineering">Engineering</a>
-        <a href="/builds">Build log</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-      </div>
-      <div>
-        <span>Systems + channels</span>
-        <a href="https://torque.a3slabs.co.ke" target="_blank" rel="noreferrer">The Torque ↗</a>
-        <a href="https://github.com/simlexx-k/a3s-labs-stat" target="_blank" rel="noreferrer">iStatus ↗</a>
-        <a href="https://github.com/simlexx-k/rotorfrontier" target="_blank" rel="noreferrer">RotorFrontier ↗</a>
-        <a href="https://github.com/simlexx-k" target="_blank" rel="noreferrer">GitHub ↗</a>
-        <a href="https://x.com/simlexx0" target="_blank" rel="noreferrer">X / @simlexx0 ↗</a>
-        <a href="/builds.xml">Build log RSS ↗</a>
-      </div>
+      <div><span>Explore</span><a href="/products">Products</a><a href="/work">Public work</a><a href="/research">Research</a><a href="/engineering">Engineering</a><a href="/builds">Build log</a><a href="/brand">Brand system</a><a href="/about">About</a><a href="/contact">Contact</a></div>
+      <div><span>Systems + channels</span><a href="https://torque.a3slabs.co.ke" target="_blank" rel="noreferrer">The Torque ↗</a><a href="https://github.com/simlexx-k/a3s-labs-stat" target="_blank" rel="noreferrer">iStatus ↗</a><a href="https://github.com/simlexx-k/rotorfrontier" target="_blank" rel="noreferrer">RotorFrontier ↗</a><a href="https://github.com/simlexx-k" target="_blank" rel="noreferrer">GitHub ↗</a><a href="https://x.com/simlexx0" target="_blank" rel="noreferrer">X / @simlexx0 ↗</a><a href="/builds.xml">Build log RSS ↗</a></div>
     </div>
   </div>
-  <div class="shell footer-bottom">
-    <span>© {new Date().getFullYear()} A3S Labs</span>
-    <span>Products · public work · research · engineering · build log</span>
-  </div>
+  <div class="shell footer-bottom"><span>© {new Date().getFullYear()} A3S Labs</span><span>Products · public work · research · engineering · build log</span></div>
 </footer>
