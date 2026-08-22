@@ -1,0 +1,14 @@
+{
+  "name": "A3S Labs",
+  "palette": {
+    "acidLime": "#C6FF00",
+    "graphite": "#111416",
+    "warmNeutral": "#F4F2EE"
+  },
+  "usage": {
+    "desktopHeader": "/brand/a3s-labs-primary-horizontal-on-dark.webp",
+    "mobileHeader": "/brand/a3s-labs-mark.webp",
+    "footer": "/brand/a3s-labs-stacked-on-dark.webp",
+    "openGraph": "/brand/a3s-labs-open-graph-1200x630.webp"
+  }
+}
