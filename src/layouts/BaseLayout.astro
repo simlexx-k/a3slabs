@@ -5,6 +5,7 @@ import "../styles/editorial.css";
 import "../styles/media.css";
 import "../styles/work.css";
 import "../styles/dense.css";
+import "../styles/brand.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
@@ -14,38 +15,21 @@ interface Props {
   canonicalPath?: string;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
-
 const {
   title = "A3S Labs — Software, intelligence and systems",
   description = "A3S Labs builds software products, applied intelligence systems, infrastructure tooling, education platforms and simulation experiments.",
   canonicalPath = Astro.url.pathname,
   structuredData,
 } = Astro.props;
-
 const canonical = new URL(canonicalPath, "https://a3slabs.co.ke").toString();
-const socialImage = "https://a3slabs.co.ke/social-card.svg";
+const socialImage = "https://a3slabs.co.ke/brand/a3s-labs-social-card.svg";
 const baseStructuredData = [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "A3S Labs",
-    url: "https://a3slabs.co.ke",
-    description,
-    publisher: { "@id": "https://a3slabs.co.ke/#organization" },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://a3slabs.co.ke/#organization",
-    name: "A3S Labs",
-    url: "https://a3slabs.co.ke",
-    sameAs: ["https://github.com/simlexx-k", "https://x.com/simlexx0"],
-  },
+  {"@context":"https://schema.org","@type":"WebSite",name:"A3S Labs",url:"https://a3slabs.co.ke",description,publisher:{"@id":"https://a3slabs.co.ke/#organization"}},
+  {"@context":"https://schema.org","@type":"Organization","@id":"https://a3slabs.co.ke/#organization",name:"A3S Labs",url:"https://a3slabs.co.ke",logo:"https://a3slabs.co.ke/brand/a3s-labs-mark.svg",sameAs:["https://github.com/simlexx-k","https://x.com/simlexx0"]},
 ];
 const extraStructuredData = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
 const structuredGraph = [...baseStructuredData, ...extraStructuredData];
 ---
-
 <!doctype html>
 <html lang="en" data-theme="dark">
   <head>
@@ -56,6 +40,8 @@ const structuredGraph = [...baseStructuredData, ...extraStructuredData];
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#0b0d0f" />
+    <meta name="application-name" content="A3S Labs" />
+    <meta name="apple-mobile-web-app-title" content="A3S Labs" />
     <meta name="google-adsense-account" content="ca-pub-5456473575052681" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="A3S Labs" />
@@ -72,53 +58,22 @@ const structuredGraph = [...baseStructuredData, ...extraStructuredData];
     <meta name="twitter:image" content={socialImage} />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title="A3S Labs build log" href="https://a3slabs.co.ke/builds.xml" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/svg+xml" href="/brand/a3s-labs-mark.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(structuredGraph)}></script>
     <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5456473575052681" crossorigin="anonymous"></script>
-    <script is:inline>
-      (() => {
-        try {
-          const stored = localStorage.getItem("a3s-theme");
-          const preferred = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-          const theme = stored === "light" || stored === "dark" ? stored : preferred;
-          document.documentElement.dataset.theme = theme;
-          document.documentElement.style.colorScheme = theme;
-        } catch {
-          document.documentElement.dataset.theme = "dark";
-        }
-      })();
-    </script>
+    <script is:inline>(()=>{try{const stored=localStorage.getItem("a3s-theme");const preferred=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";const theme=stored==="light"||stored==="dark"?stored:preferred;document.documentElement.dataset.theme=theme;document.documentElement.style.colorScheme=theme}catch{document.documentElement.dataset.theme="dark"}})();</script>
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="site-grid" aria-hidden="true"></div>
     <Header />
-    <main id="main-content">
-      <slot />
-    </main>
+    <main id="main-content"><slot /></main>
     <Footer />
-    <script is:inline>
-      (() => {
-        const root = document.documentElement;
-        const buttons = document.querySelectorAll("[data-theme-toggle]");
-        const sync = () => {
-          const theme = root.dataset.theme === "light" ? "light" : "dark";
-          root.style.colorScheme = theme;
-          document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "light" ? "#f2f0e8" : "#0b0d0f");
-          buttons.forEach((button) => {
-            button.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} theme`);
-            button.setAttribute("title", `Switch to ${theme === "dark" ? "light" : "dark"} theme`);
-          });
-        };
-        buttons.forEach((button) => button.addEventListener("click", () => {
-          const next = root.dataset.theme === "dark" ? "light" : "dark";
-          root.dataset.theme = next;
-          localStorage.setItem("a3s-theme", next);
-          sync();
-        }));
-        sync();
-      })();
-    </script>
+    <script is:inline>(()=>{const root=document.documentElement;const buttons=document.querySelectorAll("[data-theme-toggle]");const sync=()=>{const theme=root.dataset.theme==="light"?"light":"dark";root.style.colorScheme=theme;document.querySelector('meta[name="theme-color"]')?.setAttribute("content",theme==="light"?"#f2f0e8":"#0b0d0f");buttons.forEach((button)=>{button.setAttribute("aria-label",`Switch to ${theme==="dark"?"light":"dark"} theme`);button.setAttribute("title",`Switch to ${theme==="dark"?"light":"dark"} theme`)})};buttons.forEach((button)=>button.addEventListener("click",()=>{const next=root.dataset.theme==="dark"?"light":"dark";root.dataset.theme=next;localStorage.setItem("a3s-theme",next);sync()}));sync()})();</script>
   </body>
 </html>
